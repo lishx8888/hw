@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tom & Jerry</title>
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #ff8e8e;
+            --text-glow: rgba(255,255,255,0.5);
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            min-height: 100vh;
+            font-family: 'Microsoft YaHei', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(2px);
+        }
+
+        .title {
+            font-size: 3.5rem;
+            margin: 1rem 0;
+            text-shadow: 0 0 15px var(--text-glow);
+            animation: titleFloat 3s ease-in-out infinite;
+        }
+
+        .counter {
+            font-size: 2.8rem;
+            margin: 2rem 0;
+            padding: 1.8rem;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            animation:
+                    pulse 1.5s ease infinite,
+                    counterFloat 4s ease-in-out infinite;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .rose-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            filter: blur(1px);
+        }
+
+        .rose {
+            position: absolute;
+            opacity: 0;
+            animation:
+                    bloom 8s ease-out forwards,
+                    float 6s ease-in-out infinite;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+        }
+
+        /* 核心动画 */
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0) rotate(-1deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+        }
+
+        @keyframes counterFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @keyframes bloom {
+            0% { opacity: 0; transform: scale(0) rotate(0deg); }
+            50% { opacity: 0.9; transform: scale(1) rotate(180deg); }
+            100% { opacity: 0.6; transform: scale(1.2) rotate(360deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0,0) rotate(0deg); }
+            25% { transform: translate(5px,5px) rotate(2deg); }
+            50% { transform: translate(-5px,8px) rotate(-2deg); }
+            75% { transform: translate(3px,-5px) rotate(1deg); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.2); }
+            70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); }
+            100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .title { font-size: 2.5rem; }
+            .counter { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="title">🌹 相识相知 🌹</h1>
+    <div id="countdown" class="counter"></div>
+</div>
+
+<div class="rose-container" id="roses"></div>
+
+<script>
+    // 配置项
+    const CONFIG = {
+        TARGET_DATE: '1940-02-10T08:00:00+08:00',
+        ROSE_COLORS: ['#ff99cc', '#ff77aa', '#ff5599', '#ff3388'],
+        DENSITY: 0.00015,
+        MAX_SIZE: 120,
+        MIN_SIZE: 30
+    };
+
+    // 改进的玫瑰SVG（增加动态细节）
+    const ROSE_SVG = `
+            <svg viewBox="0 0 100 100">
+                <path d="M50 10
+                    C60 0,70 5,75 15
+                    C80 25,70 40,50 50
+                    C30 40,20 25,25 15
+                    C30 5,40 0,50 10"
+                    fill="currentColor" opacity="0.8"/>
+                <path d="M50 20
+                    C55 15,65 15,68 25
+                    C71 35,65 45,50 55
+                    C35 45,29 35,32 25
+                    C35 15,45 15,50 20"
+                    fill="currentColor" opacity="0.9"/>
+                <path d="M50 35
+                    Q45 40,43 45
+                    Q50 50,57 45
+                    Q55 40,50 35"
+                    fill="currentColor"/>
+                <path d="M30 70
+                    Q40 65,50 75
+                    Q60 65,70 70
+                    Q65 80,50 85
+                    Q35 80,30 70"
+                    fill="#44aa44" opacity="0.3"/>
+            </svg>
+        `;
+
+    // 倒计时逻辑
+    function updateCountdown() {
+        const target = new Date(CONFIG.TARGET_DATE);
+        const now = new Date();
+        const diff = now - target;
+
+        document.getElementById('countdown').innerHTML = diff < 0
+            ? "🎉 时光已至，爱意永恒！"
+            : formatTime(diff);
+    }
+
+    function formatTime(diff) {
+        const days = Math.floor(diff / 864e5);
+        const hours = Math.floor((diff % 864e5) / 36e5);
+        const minutes = Math.floor((diff % 36e5) / 6e4);
+        const seconds = Math.floor((diff % 6e4) / 1e3);
+
+        return `${days}天 ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    }
+
+    function pad(n) { return n.toString().padStart(2,'0'); }
+
+    // 智能玫瑰生成
+    function createRoses() {
+        const container = document.getElementById('roses');
+        const { width, height } = container.getBoundingClientRect();
+        const area = width * height;
+        const count = Math.min(100, Math.floor(area * CONFIG.DENSITY));
+
+        container.innerHTML = '';
+
+        for(let i = 0; i < count; i++) {
+            const rose = document.createElement('div');
+            rose.className = 'rose';
+            rose.innerHTML = ROSE_SVG;
+
+            const size = Math.random()*(CONFIG.MAX_SIZE-CONFIG.MIN_SIZE)+CONFIG.MIN_SIZE;
+            const delay = Math.random() * 8;
+            const duration = 6 + Math.random() * 4;
+            const color = CONFIG.ROSE_COLORS[Math.floor(Math.random()*CONFIG.ROSE_COLORS.length)];
+
+            Object.assign(rose.style, {
+                width: `${size}px`,
+                height: `${size}px`,
+                left: `${Math.random()*(width + 200)-100}px`,
+                top: `${Math.random()*(height + 200)-100}px`,
+                color: color,
+                animationDelay: `${delay}s`,
+                animationDuration: `${duration}s`,
+                transformOrigin: `${Math.random()*100}% ${Math.random()*100}%`
+            });
+
+            container.appendChild(rose);
+        }
+    }
+
+    // 初始化
+    window.addEventListener('load', () => {
+        setInterval(updateCountdown, 1000);
+        createRoses();
+        updateCountdown();
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(createRoses, 200);
+        });
+    });
+</script>
+</body>
+</html>
