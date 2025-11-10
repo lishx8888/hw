@@ -2,18 +2,23 @@ name: Scrape Website and Deploy to GitHub Pages
 
 on:
   schedule:
-    - cron: '0 4 * * *' # 北京时间每天12点运行（UTC+8，对应UTC时间4点）
+    - cron: '0 4 * * *' # UTC 4:00 → 北京时间 12:00
   push:
     branches:
       - main
+  workflow_dispatch: # 允许手动触发
 
 jobs:
-  scrape:
+  scrape-and-deploy:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write     # 允许 push
+      pages: write        # 允许部署 Pages
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0    # 确保能 git push
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -25,7 +30,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests beautifulsoup4
 
-      - name: Fetch data and save to file
+      - name: Scrape and save
         run: |
           python v2ray/scrape.py
 
@@ -33,15 +38,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .  # 指定发布目录
-          
-#      - name: Commit and push changes
-#        env:
-#          ACTIONS_TOKEN: ${{ secrets.ACTIONS_TOKEN }}
-#        run: |
-#          git config --global user.name 'github-actions[bot]'
-#          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-#          git add v2ray/result.txt
-#          git commit -m 'Update scraped text'
-#          git push https://${{ github.actor }}:${{ secrets.ACTIONS_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
-
+          publish_dir: ./v2ray  # 改成你的结果目录，例如 result.txt 所在目录
+          force_orphan: true   # 推荐：只保留最新部署
