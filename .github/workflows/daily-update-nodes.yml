@@ -1,0 +1,186 @@
+name: Daily Update Node Information
+
+on:
+  schedule:
+    # 每天凌晨2点运行（UTC时间）
+    - cron: '0 2 * * *'
+  # 允许手动触发
+  workflow_dispatch:
+  # 代码推送时立即运行
+  push:
+    branches: [ main, gh-pages ]  # 适配不同的默认分支名称
+  # 允许拉取请求触发
+  pull_request:
+    branches: [ main, gh-pages ]
+
+jobs:
+  update-nodes:
+    runs-on: ubuntu-latest
+    # 添加超时设置和错误处理
+    timeout-minutes: 30
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4 pyyaml
+      
+      - name: Update V2Ray nodes
+        id: scrape
+        run: |
+          echo "Running V2Ray node scraper at $(date)"
+          mkdir -p logs
+          cd v2ray
+          python scrape.py > ../logs/scrape_output.log 2>&1 || {
+            echo "Error: V2Ray scraper encountered errors!"
+            echo "Scraper output:"
+            tail -n 30 ../logs/scrape_output.log
+            # 即使失败也要继续，尝试创建空文件以保持一致性
+            echo "# No nodes found at $(date)" > v2ray.txt
+            echo "Warning: Created empty v2ray.txt file"
+          }
+          # 检查是否生成了v2ray.txt文件
+          if [ -f "v2ray.txt" ]; then
+            NODE_COUNT=$(cat v2ray.txt | grep -v '^#' | wc -l)
+            echo "V2Ray nodes file generated, containing $NODE_COUNT valid nodes"
+            echo "node_count=$NODE_COUNT" >> $GITHUB_OUTPUT
+            # 显示文件前几行作为预览
+            echo "First few lines of v2ray.txt:"
+            head -n 5 v2ray.txt
+          else
+            echo "Error: v2ray.txt file not found after scraping"
+            echo "node_count=0" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Convert to Clash format
+        run: |
+          echo "Converting V2Ray nodes to Clash format at $(date)"
+          cd v2ray
+          # 确保v2ray.txt存在
+          if [ -f "v2ray.txt" ]; then
+            python to_clash.py || {
+              echo "Warning: Conversion to Clash format encountered errors, but continuing..."
+            }
+            # 检查是否生成了clash配置文件
+            if [ -f "clash_config.yaml" ]; then
+              echo "Clash configuration file generated successfully"
+            else
+              echo "Error: clash_config.yaml file not found after conversion"
+            fi
+          else
+            echo "Skipping conversion: v2ray.txt file not found"
+          fi
+      
+      - name: Commit and push changes
+        id: commit
+        run: |
+          echo "Configuring git and preparing commit..."
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git config --global --add safe.directory $(pwd)
+          
+          # 确保v2ray目录存在
+          mkdir -p v2ray
+          
+          # 单独添加文件，确保每个文件都被正确处理
+          echo "Checking files to add..."
+          if [ -f "v2ray/v2ray.txt" ]; then
+            git add v2ray/v2ray.txt
+            echo "Added v2ray/v2ray.txt to staging"
+          else
+            echo "Warning: v2ray/v2ray.txt not found"
+          fi
+          
+          if [ -f "v2ray/clash_config.yaml" ]; then
+            git add v2ray/clash_config.yaml
+            echo "Added v2ray/clash_config.yaml to staging"
+          else
+            echo "Warning: v2ray/clash_config.yaml not found"
+          fi
+          
+          # 检查是否有更改
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "Committing changes to repository"
+            git commit -m "Update node information: $(date +'%Y-%m-%d %H:%M:%S')"
+            
+            # 使用重试机制推送更改
+            echo "Attempting to push changes..."
+            PUSH_ATTEMPTS=0
+            MAX_ATTEMPTS=3
+            until [ $PUSH_ATTEMPTS -ge $MAX_ATTEMPTS ]
+            do
+              git push origin HEAD:${GITHUB_REF_NAME} && break
+              PUSH_ATTEMPTS=$((PUSH_ATTEMPTS+1))
+              echo "Push attempt $PUSH_ATTEMPTS failed, retrying in 5 seconds..."
+              sleep 5
+            done
+            
+            if [ $PUSH_ATTEMPTS -lt $MAX_ATTEMPTS ]; then
+              echo "Push successful!"
+              echo "changed=true" >> $GITHUB_OUTPUT
+            else
+              echo "Error: Push failed after $MAX_ATTEMPTS attempts"
+            fi
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Generate summary
+        if: always()
+        run: |
+          echo "==================================================="
+          echo "WorkFlow Execution Summary"
+          echo "==================================================="
+          echo "Workflow completed at $(date)"
+          echo "Job status: ${{ job.status }}"
+          echo "Trigger: ${{ github.event_name }}"
+          
+          # 添加详细的统计信息
+          echo "\nNode Information:"
+          cd v2ray
+          if [ -f "v2ray.txt" ]; then
+            TOTAL_LINES=$(cat v2ray.txt | wc -l)
+            VALID_NODES=$(cat v2ray.txt | grep -v '^#' | wc -l)
+            echo "V2Ray nodes file size: $(du -h v2ray.txt | cut -f1)"
+            echo "Total lines in v2ray.txt: $TOTAL_LINES"
+            echo "Valid nodes count: $VALID_NODES"
+            echo "File last modified: $(stat -c '%y' v2ray.txt)"
+          else
+            echo "❌ V2Ray nodes file not found"
+          fi
+          
+          echo "\nClash Configuration:"
+          if [ -f "clash_config.yaml" ]; then
+            echo "✅ Clash configuration generated successfully"
+            echo "File size: $(du -h clash_config.yaml | cut -f1)"
+            echo "File last modified: $(stat -c '%y' clash_config.yaml)"
+            # 尝试统计Clash配置中的节点数
+            CLASH_NODES=$(grep -c '^  - name:' clash_config.yaml || echo "Unknown")
+            echo "Approximate nodes in Clash config: $CLASH_NODES"
+          else
+            echo "❌ Clash configuration not found"
+          fi
+          
+          echo "\nRepository Changes:"
+          if [ "${{ steps.commit.outputs.changed || 'false' }}" == "true" ]; then
+            echo "✅ Changes committed and pushed successfully"
+          else
+            echo "ℹ️ No changes were committed to the repository"
+          fi
+          
+          echo "==================================================="
+          echo "If you encounter issues, please check:"
+          echo "1. The workflow logs for detailed error messages"
+          echo "2. That the repository has write permissions"
+          echo "3. That the scraping sources are still available"
+          echo "==================================================="
