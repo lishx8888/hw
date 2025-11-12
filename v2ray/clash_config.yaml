@@ -1,6 +1,6 @@
 
-# 生成时间: 2025-11-10 02:28:18
-# 节点数量: 46
+# 生成时间: 2025-11-12 03:08:05
+# 节点数量: 17
 mixed-port: 7890
 allow-lan: true
 bind-address: '*'
@@ -25,9 +25,69 @@ proxies:
   servername: ''
 - name: vmess_node
   type: vmess
+  server: 2001:bc8:1203:209::50
+  port: '23008'
+  uuid: e994b804-345c-4e8b-a827-7e005694d146
+  alterId: '0'
+  cipher: auto
+  tls: false
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: /github.com/Alvin9999
+    headers:
+      Host: www.bing.com
+  servername: ''
+- name: vmess_node
+  type: vmess
+  server: 47.245.106.193
+  port: '22433'
+  uuid: bfcb103f-2133-4965-8684-6b4c8ef7a774
+  alterId: '0'
+  cipher: auto
+  tls: false
+  skip-cert-verify: true
+  servername: ''
+- name: vmess_node
+  type: vmess
+  server: 141.101.121.26
+  port: '80'
+  uuid: d967ffca-de90-4daa-bd00-d527e5bae11f
+  alterId: '0'
+  cipher: auto
+  tls: false
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: /?BIA_TELEGRAM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)
+    headers:
+      Host: google.whatsapp.snapp.torob.basalam.leoshopping77.ir.
+  servername: ''
+- name: vmess_node
+  type: vmess
+  server: 103.243.26.209
+  port: '10086'
+  uuid: c5ec2e3f-c058-46a8-a148-1831824bb94b
+  alterId: '0'
+  cipher: auto
+  tls: false
+  skip-cert-verify: true
+  servername: ''
+- name: vmess_node
+  type: vmess
   server: 103.243.26.209
   port: '8080'
   uuid: bc7e6840-ab83-4570-eaae-d9aff1e2da09
+  alterId: '0'
+  cipher: auto
+  tls: false
+  skip-cert-verify: true
+  servername: ''
+- name: vmess_node
+  type: vmess
+  server: 208.76.223.218
+  port: '27092'
+  uuid: a0596ba6-72a3-4366-8992-77088da65bd8
   alterId: '0'
   cipher: auto
   tls: false
@@ -45,6 +105,26 @@ proxies:
   servername: ''
 - name: vmess_node
   type: vmess
+  server: 62.113.200.175
+  port: '44749'
+  uuid: ba1d9a12-7fb5-495e-a547-c87264db41ea
+  alterId: '0'
+  cipher: auto
+  tls: false
+  skip-cert-verify: true
+  servername: ''
+- name: vmess_node
+  type: vmess
+  server: 62.113.200.175
+  port: '46668'
+  uuid: 680f3f4d-a13a-4869-ada6-894683cf2ffe
+  alterId: '0'
+  cipher: auto
+  tls: false
+  skip-cert-verify: true
+  servername: ''
+- name: vmess_node
+  type: vmess
   server: 152.70.92.69
   port: '80'
   uuid: bb9c3993-a4b9-4dad-aeb9-ac86371ae68b
@@ -55,74 +135,19 @@ proxies:
   servername: ''
 - name: vmess_node
   type: vmess
-  server: 103.243.26.209
-  port: '10086'
-  uuid: c5ec2e3f-c058-46a8-a148-1831824bb94b
-  alterId: '0'
+  server: 1.32.216.163
+  port: '27578'
+  uuid: 3b3aff88-2ed2-4c68-bc0f-d1efe4131e2c
+  alterId: 0
   cipher: auto
   tls: false
   skip-cert-verify: true
   servername: ''
 - name: vmess_node
   type: vmess
-  server: 2001:bc8:1203:209::50
-  port: '23008'
-  uuid: e994b804-345c-4e8b-a827-7e005694d146
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /github.com/Alvin9999
-    headers:
-      Host: www.bing.com
-  servername: ''
-- name: vmess_node
-  type: vmess
-  server: tkcmi.5tk.top
-  port: '38637'
-  uuid: 93058ab5-bb29-44d4-c309-d224c0967732
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-  servername: ''
-- name: vmess_node
-  type: vmess
-  server: v5.heduian.link
-  port: '30805'
-  uuid: cbb3f877-d1fb-344c-87a9-d153bffd5484
-  alterId: '2'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-  servername: ''
-- name: vmess_node
-  type: vmess
-  server: 8.148.248.105
-  port: '11215'
-  uuid: c74f0304-5b43-3772-852a-2b108c423d23
-  alterId: 2
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-  servername: ''
-- name: vmess_node
-  type: vmess
-  server: 8.148.194.27
-  port: '11210'
-  uuid: c74f0304-5b43-3772-852a-2b108c423d23
-  alterId: 2
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-  servername: ''
-- name: vmess_node
-  type: vmess
-  server: 36.150.27.76
-  port: '49509'
-  uuid: aed41f1e-75e7-41ce-a2d4-38f65a6bbc86
+  server: 175.29.22.101
+  port: '28034'
+  uuid: d2540325-9ad6-33d7-be86-259b5bba4ef8
   alterId: 0
   cipher: auto
   tls: false
@@ -145,434 +170,46 @@ proxies:
   servername: ''
 - name: vmess_node
   type: vmess
-  server: 185.146.173.82
-  port: '80'
-  uuid: d967ffca-de90-4daa-bd00-d527e5bae11f
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /?BIA_TELEGRAM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)
-    headers:
-      Host: google.whatsapp.snapp.torob.basalam.leoshopping77.ir.
-- name: vmess_node
-  type: vmess
-  server: 185.146.173.16
-  port: '80'
-  uuid: d967ffca-de90-4daa-bd00-d527e5bae11f
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /?BIA_TELEGRAM (@AZARBAYJAB1) TM (@AZARBAYJAB1) TM (@AZARBAYJAB1) TM (@AZARBAYJAB1)
-      TM (@AZARBAYJAB1) TM (@AZARBAYJAB1)
-    headers:
-      Host: google.whatsapp.snapp.torob.basalam.leoshopping77.ir.
-- name: vmess_node
-  type: vmess
-  server: 141.101.121.250
-  port: '80'
-  uuid: d967ffca-de90-4daa-bd00-d527e5bae11f
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /?BIA_TELEGRAM (@AZARBAYJAB1) TM (@AZARBAYJAB1) TM (@AZARBAYJAB1) TM (@AZARBAYJAB1)
-      TM (@AZARBAYJAB1) TM (@AZARBAYJAB1)
-    headers:
-      Host: google.whatsapp.snapp.torob.basalam.leoshopping77.ir.
-- name: vmess_node
-  type: vmess
-  server: 185.146.173.24
-  port: '80'
-  uuid: d967ffca-de90-4daa-bd00-d527e5bae11f
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /?BIA_TELEGRAM (@AZARBAYJAB1) TM (@AZARBAYJAB1) TM (@AZARBAYJAB1) TM (@AZARBAYJAB1)
-      TM (@AZARBAYJAB1) TM (@AZARBAYJAB1)
-    headers:
-      Host: google.whatsapp.snapp.torob.basalam.leoshopping77.ir.
-- name: vmess_node
-  type: vmess
-  server: 185.146.173.117
-  port: '80'
-  uuid: d967ffca-de90-4daa-bd00-d527e5bae11f
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /?BIA_TELEGRAM (@AZARBAYJAB1) TM (@AZARBAYJAB1) TM (@AZARBAYJAB1) TM (@AZARBAYJAB1)
-      TM (@AZARBAYJAB1) TM (@AZARBAYJAB1)
-    headers:
-      Host: google.whatsapp.snapp.torob.basalam.leoshopping77.ir.
-- name: vmess_node
-  type: vmess
-  server: 175.29.22.101
-  port: '28034'
-  uuid: d2540325-9ad6-33d7-be86-259b5bba4ef8
-  alterId: ''
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 1762596741.bilibiliapp.cn
-  port: '443'
-  uuid: f744cd83-ecc4-46c5-a2ad-cf3dfa9e12a0
+  server: nl-v2ray.freevmess.com
+  port: '2083'
+  uuid: c3d066bc-4170-4006-a95c-0012367e8f13
   alterId: '0'
   cipher: auto
   tls: true
   skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /
-    headers:
-      Host: mrotr1mrl.speed.ydindda.cccp.useraaca.pp.ua
-  servername: mrotr1mrl.speed.ydindda.cccp.useraaca.pp.ua
+  servername: nl-v2ray.freevmess.com
 - name: vmess_node
   type: vmess
-  server: 104.18.240.238
-  port: '80'
-  uuid: d967ffca-de90-4daa-bd00-d527e5bae11f
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /?BIA_TELEGRAM (@AZARBAYJAB1) TM (@AZARBAYJAB1) TM (@AZARBAYJAB1) TM (@AZARBAYJAB1)
-      TM (@AZARBAYJAB1) TM (@AZARBAYJAB1)
-    headers:
-      Host: google.whatsapp.snapp.torob.basalam.leoshopping77.ir.
-- name: vmess_node
-  type: vmess
-  server: 69.84.182.108
-  port: '2053'
-  uuid: 06ce4048-f18e-4e14-b897-dc1f570cb263
-  alterId: '0'
-  cipher: auto
-  tls: true
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /profile/sharenode
-    headers:
-      Host: cdn-node-oss-76.paofu.de
-- name: vmess_node
-  type: vmess
-  server: 104.18.20.69
-  port: '2053'
-  uuid: 06ce4048-f18e-4e14-b897-dc1f570cb263
-  alterId: '0'
-  cipher: auto
-  tls: true
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /profile/sharenode
-    headers:
-      Host: cdn-node-oss-76.paofu.de
-- name: vmess_node
-  type: vmess
-  server: 146.59.118.250
-  port: 443
-  uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-  alterId: '0'
-  cipher: auto
-  tls: true
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: linkvws
-    headers:
-      Host: lammaland.org
-- name: vmess_node
-  type: vmess
-  server: 140.238.2.250
-  port: 443
-  uuid: 41a7089a-040b-4538-8b8d-010902405bde
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 176.223.131.167
-  port: 11485
-  uuid: 70985baa-eebd-4561-bb9c-78529032df09
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 176.223.131.167
-  port: 37141
-  uuid: 8f249e29-9019-4883-d135-eddea9b7d0c5
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 176.223.131.167
-  port: 37879
-  uuid: 8652dff9-95b6-4708-ad44-4e68376fc82b
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 176.223.131.167
-  port: 39257
-  uuid: b8f5fac9-b786-45f8-bb5f-457ce9240275
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 176.223.131.167
-  port: 39476
-  uuid: 9002d40c-2013-4d22-ad9d-0edc4aa4f048
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 176.223.131.167
-  port: 47608
-  uuid: a83447ba-4026-4226-fc07-cef5b3fb0314
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 176.223.131.167
-  port: 48597
-  uuid: 36438716-6982-4d7f-a200-781c4992496f
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 176.223.131.167
-  port: 40329
-  uuid: 3ba7645b-9b90-40cd-b7f7-1714aa1bb83b
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 176.223.131.167
-  port: 40739
-  uuid: 84ee2e69-98bd-4911-d1d4-8bd9ebaee056
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 176.223.131.167
-  port: 54812
-  uuid: afd29a15-a791-43d0-c0fb-8441f7af1ea3
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 176.223.131.167
-  port: 55447
-  uuid: db6576b7-6469-4166-de59-5b8f4007a470
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 176.223.131.167
-  port: 51860
-  uuid: e887a712-aac4-485e-c572-0ee66c2da31e
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 172.111.146.64
+  server: 141.101.120.130
   port: 80
-  uuid: 05b8c783-7f59-47f9-9923-06a465679f6a
+  uuid: d967ffca-de90-4daa-bd00-d527e5bae11f
   alterId: '0'
   cipher: auto
   tls: false
   skip-cert-verify: true
   network: ws
   ws-opts:
-    path: /vmess/
+    path: /?---@AZARBAYKAB1---@AZARBAYJAB1---@AZARBAYJAB1---@AZARBAYJAB1---@AZARBAYJAB1/?ed=2560
+    headers:
+      Host: google.whatsapp.snapp.torob.basalam.leoshopping77.ir.
+- name: vmess_node
+  type: vmess
+  server: 8.217.92.110
+  port: 20522
+  uuid: 31e1f90f-0218-4097-91f9-a42df9b3334a
+  alterId: '0'
+  cipher: auto
+  tls: false
+  skip-cert-verify: true
+  network: ws
+  ws-opts:
+    path: /telegram_@sswia
     headers:
       Host: ''
-- name: vmess_node
-  type: vmess
-  server: 23.162.200.227
-  port: 443
-  uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-  alterId: '0'
-  cipher: auto
-  tls: true
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /linkvws
-    headers:
-      Host: ''
-- name: vmess_node
-  type: vmess
-  server: 45.231.132.44
-  port: 20294
-  uuid: 2eb510a2-9779-4e49-a2f2-aea96e348243
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 57.128.216.125
-  port: 443
-  uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-  alterId: '0'
-  cipher: auto
-  tls: true
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: linkvws
-    headers:
-      Host: kampong.org
-- name: vmess_node
-  type: vmess
-  server: 57.129.28.212
-  port: 443
-  uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-  alterId: '0'
-  cipher: auto
-  tls: true
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: linkvws
-    headers:
-      Host: fapeng.org
-- name: vmess_node
-  type: vmess
-  server: 57.129.28.63
-  port: 443
-  uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-  alterId: '0'
-  cipher: auto
-  tls: true
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: linkvws
-    headers:
-      Host: fapeng.org
-- name: vmess_node
-  type: vmess
-  server: 57.129.59.199
-  port: 443
-  uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
-  alterId: '0'
-  cipher: auto
-  tls: true
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: linkvws
-    headers:
-      Host: kampong.org
-- name: vmess_node
-  type: vmess
-  server: 68.64.176.148
-  port: 11325
-  uuid: 8afb5b6d-51f6-4bf8-f4e2-0378822200b3
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: 8.218.120.209
-  port: 15160
-  uuid: 540a9fd9-9dc8-434f-c971-a10e9befd7fa
-  alterId: '0'
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-- name: vmess_node
-  type: vmess
-  server: v019.emovpn.xyz
-  port: 2087
-  uuid: a78fc14e-4e8b-4fc0-8cab-86fd81c583ca
-  alterId: '0'
-  cipher: auto
-  tls: true
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /
-    headers:
-      Host: v019.emovpn.xyz
 proxy-groups:
 - name: 🔰 节点选择
   type: select
   proxies:
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
-  - vmess_node
   - vmess_node
   - vmess_node
   - vmess_node
