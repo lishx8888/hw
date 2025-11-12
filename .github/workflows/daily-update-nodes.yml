@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
   # 代码推送时立即运行
   push:
-    branches: [ main, gh-pages ]  # 适配不同的默认分支名称
+    branches: [ gh-pages ]  # 适配不同的默认分支名称
   # 允许拉取请求触发
   pull_request:
     branches: [ main, gh-pages ]
